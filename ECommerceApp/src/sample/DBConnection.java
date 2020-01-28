@@ -19,12 +19,14 @@ public class DBConnection {
         Password=password;
     }*/
 
-    public void connect(String URL, String Username, String Password){
+    public boolean connect(String URL, String Username, String Password){
        /* String url = "jdbc:postgresql://localhost/test";
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","admin");
         props.setProperty("ssl","false");*/
+
+       boolean result=false;
         String url = "jdbc:postgresql://"+URL;
         Properties props = new Properties();
         props.setProperty("user",Username);
@@ -34,25 +36,26 @@ public class DBConnection {
         try {
             connection = DriverManager.getConnection(url, props);
             System.out.println("Connected");
+            result=true;
 
         }catch (SQLException ex){
             System.out.println("error connection DB");
         }
-
+        return result;
     }
 
-    public void tryQuery() {
+    public String tryQuery() {
+        String result="";
         try {
             Statement st = connection.createStatement();
             ResultSet rs=null;
             if(!connection.equals(null)){
                 rs= st.executeQuery("SELECT * FROM Citta");
-                ResultSetMetaData rsmd = rs.getMetaData();
-                String columnName = rsmd.getColumnName(1);
                 if(!rs.equals(null)){
                     while (rs.next())
                     {
                         System.out.println(rs.getString(1));
+                        result=result+rs.getString(1);
                     }
                     rs.close();
                     st.close();
@@ -61,5 +64,6 @@ public class DBConnection {
         } catch (SQLException ex) {
             System.out.println("error in query");
         }
+        return result;
     }
 }

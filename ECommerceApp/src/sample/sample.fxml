@@ -15,7 +15,7 @@
    <bottom>
       <HBox spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Not connected">
+            <Label fx:id="connectionLabel" text="Not connected">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
@@ -24,7 +24,7 @@
                </font>
             </Label>
             <Region HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#connectionButtonClicked" text="Try Connection to DB">
+            <Button fx:id="connectionButton" mnemonicParsing="false" onAction="#connectionButtonClicked" text="Try Connection to DB">
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
@@ -75,7 +75,7 @@
             <Region HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button minWidth="133.0" mnemonicParsing="false" text="Statistiche">
+                  <Button fx:id="statisticheButton" disable="true" minWidth="133.0" mnemonicParsing="false" onAction="#statisticheButtonClicked" text="Statistiche">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -83,12 +83,12 @@
                         <Font name="Corbel Light" size="20.0" />
                      </font>
                   </Button>
-                  <Button minWidth="133.0" mnemonicParsing="false" text="Aggiungi">
+                  <Button fx:id="aggiungiButton" disable="true" minWidth="133.0" mnemonicParsing="false" text="Aggiungi">
                      <font>
                         <Font name="Corbel Light" size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" text="Modifica dati">
+                  <Button fx:id="modificaButton" disable="true" mnemonicParsing="false" text="Modifica dati">
                      <font>
                         <Font name="Corbel Light" size="20.0" />
                      </font>
