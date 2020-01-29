@@ -66,4 +66,22 @@ public class DBConnection {
         }
         return result;
     }
+
+    //prendo solo il result set di una query
+
+    public ResultSet getResultSet(String query){
+
+        ResultSet rs=null;
+
+        try {
+            Statement st = connection.createStatement();
+            rs=null;
+            if(!connection.equals(null)){
+                rs= st.executeQuery(query);
+            }
+        } catch (SQLException ex) {
+            System.out.println("error in query");
+        }
+        return rs;
+    }
 }

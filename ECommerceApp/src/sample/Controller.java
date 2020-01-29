@@ -57,6 +57,8 @@ public class Controller {
         String result=connection.tryQuery();
     }
 
+
+    //apre il sotto menù statistiche
     public void statisticheButtonClicked(ActionEvent event) throws IOException {
        /* Parent ViewParent = FXMLLoader.load(getClass().getResource("statistiche.fxml"));
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -74,6 +76,7 @@ public class Controller {
        controllerStat.verifyConnection(connection);
 
        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setTitle("ECommerce Nuova Autoricambi");
        window.setScene(ViewScene);
        window.show();
     }
