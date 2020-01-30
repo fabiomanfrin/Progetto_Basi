@@ -6,10 +6,12 @@ public class Ordine {
     private String Data;
     private String Indirizzo;
     private String Cliente;
-    public Ordine(String id, String data, String indirizzo, String cliente){
+    private String Codice;
+    public Ordine(String id, String data, String indirizzo, String codice, String cliente){
         Id=id;
         Data=data;
         Indirizzo=indirizzo;
+        Codice=codice;
         Cliente=cliente;
     }
 
@@ -25,7 +27,9 @@ public class Ordine {
         return Indirizzo;
     }
 
-
+    public String getCodice() {
+        return Codice;
+    }
 
     public String getCliente() {
         return Cliente;

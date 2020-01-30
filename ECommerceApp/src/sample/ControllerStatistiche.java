@@ -127,10 +127,14 @@ public class ControllerStatistiche {
         //colonna cliente
         TableColumn<Ordine,String> clienteColumn=new TableColumn<>("Codice Cliente");
         clienteColumn.setMinWidth(100);
-        clienteColumn.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+        clienteColumn.setCellValueFactory(new PropertyValueFactory<>("codice"));
+        //colonna nome cliente
+        TableColumn<Ordine,String> nomeClienteColumn=new TableColumn<>("Nome Cliente");
+        nomeClienteColumn.setMinWidth(100);
+        nomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 
         ordineTableView.setItems(getOrdine());
-        ordineTableView.getColumns().addAll(idColumn,dataColumn,indirizzoColumn,clienteColumn);
+        ordineTableView.getColumns().addAll(idColumn,dataColumn,indirizzoColumn,clienteColumn,nomeClienteColumn);
     }
 
     //torna menù principale
@@ -180,13 +184,12 @@ public class ControllerStatistiche {
     //prende la lista degli ordini
     private ObservableList<Ordine> getOrdine(){
         ObservableList<Ordine> o= FXCollections.observableArrayList();
-        ResultSet rs=connection.getResultSet("SELECT * FROM Ordine");
+        ResultSet rs=connection.getResultSet("SELECT Id, Data, Ordine.Numero, Ordine.Via, Ordine.Citta, Ordine.Cliente, Nome, Cognome FROM Ordine INNER JOIN Cliente ON cliente=codice");
         try{
             if(!rs.equals(null)){
                 while (rs.next())
                 {
-                    o.add(new Ordine(rs.getString(1),rs.getString(2),"Via "+rs.getString(4)+" "+rs.getString(3)+", "+rs.getString(5),rs.getString(6)));
-
+                    o.add(new Ordine(rs.getString(1),rs.getString(2),"Via "+rs.getString(4)+" "+rs.getString(3)+" "+rs.getString(5),rs.getString(6),rs.getString(7)+" "+rs.getString(8)));
                 }
                 rs.close();
             }
