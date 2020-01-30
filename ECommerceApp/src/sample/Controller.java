@@ -21,6 +21,8 @@ public class Controller {
     @FXML
     Label connectionLabel;
     @FXML
+    Label errorLabel;
+    @FXML
     Button connectionButton;
     @FXML
     Button statisticheButton;
@@ -43,9 +45,9 @@ public class Controller {
     }
 
     public void connectionButtonClicked(){
-        connection=new DBConnection();
+        connection=new DBConnection("localhost/test","postgres","admin");
         boolean connRes=false;
-        connRes=connection.connect("localhost/test","postgres","admin");
+        connRes=connection.connect();
 
         if(connRes){
             connectionLabel.setText("Connected");
@@ -54,7 +56,7 @@ public class Controller {
             aggiungiButton.setDisable(false);
             modificaButton.setDisable(false);
         }
-        String result=connection.tryQuery();
+        //String result=connection.tryQuery();
     }
 
 

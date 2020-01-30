@@ -5,9 +5,16 @@ import java.util.Properties;
 
 public class DBConnection {
 
-    Connection connection;
-    public DBConnection(){
+    private Connection connection;
+    private String URL;
+    private String Username;
+    private String Password;
+
+    public DBConnection(String url, String username, String password){
         connection=null;
+        URL=url;
+        Username=username;
+        Password=password;
     }
     /*private String URL;
     private String Username;
@@ -19,7 +26,7 @@ public class DBConnection {
         Password=password;
     }*/
 
-    public boolean connect(String URL, String Username, String Password){
+    public boolean connect(){
        /* String url = "jdbc:postgresql://localhost/test";
         Properties props = new Properties();
         props.setProperty("user","postgres");
@@ -54,7 +61,7 @@ public class DBConnection {
                 if(!rs.equals(null)){
                     while (rs.next())
                     {
-                        System.out.println(rs.getString(1));
+                        //System.out.println(rs.getString(1));
                         result=result+rs.getString(1);
                     }
                     rs.close();

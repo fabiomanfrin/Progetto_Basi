@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLogin">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" styleClass="bodybg" stylesheets="@background.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerLogin">
    <center>
       <HBox BorderPane.alignment="CENTER">
          <children>
             <Region HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER" spacing="15.0">
                <children>
-                  <TextField fx:id="indirizzoTextField" minWidth="225.0" promptText=" Indirizzo es.(&quot;localhost/db_name&quot;)" />
-                  <TextField fx:id="usernameTextField" promptText="Username" />
-                  <TextField fx:id="passwordTextField" promptText="Password" />
+                  <TextField fx:id="indirizzoTextField" minWidth="225.0" promptText=" Indirizzo es.(&quot;localhost:port/db_name&quot;)" text="localhost/progetto" />
+                  <TextField fx:id="usernameTextField" promptText="Username" text="postgres" />
+                  <TextField fx:id="passwordTextField" promptText="Password" text="admin" />
                   <Button mnemonicParsing="false" onAction="#connectionButtonClicked" text="Try connection">
                      <VBox.margin>
                         <Insets top="25.0" />

@@ -24,9 +24,14 @@ public class ControllerStatistiche {
 
     @FXML
     private Label fatturatoLabel;
+    @FXML
+    private Label prodottiPiuLabel;
+
+   /* @FXML
+    private TableView<Citta> cittaTableView;*/
 
     @FXML
-    private TableView<Citta> cittaTableView;
+    private TableView<Ordine> ordineTableView;
 
     public void verifyConnection(DBConnection conn){
         if(conn!=null){
@@ -39,18 +44,93 @@ public class ControllerStatistiche {
     }
 
     private void loadScene(){
-        fatturatoLabel.setText(connection.tryQuery());
+
+        getFatturato();
+        //getProdottiPiuVenduti();
+        loadTableOrdine();
         /*test getCitta
         ObservableList<Citta> test=getCitta();
         System.out.println(test.get(0).getNome());
         */
+        /*load delle citta
         TableColumn<Citta,String> nomeColumn=new TableColumn<>("Nome");
         nomeColumn.setMinWidth(100);
         nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
         cittaTableView.setItems(getCitta());
         cittaTableView.getColumns().addAll(nomeColumn);
+        */
+    }
 
+    private void getProdottiPiuVenduti() {
+        try{
+            ResultSet prodottiPiuRS=connection.getResultSet("CREATE VIEW Tot AS(" +
+                    "SELECT Prodotto, COUNT(*) AS Qta" +
+                    "FROM ProdottoAcquistato" +
+                    "GROUP BY Prodotto" +
+                    ");" +
+                    "SELECT Prodotto" +
+                    "FROM Tot" +
+                    "WHERE Qta IN (" +
+                    "SELECT MAX(Qta)" +
+                    "FROM Tot" +
+                    ");");
+
+            if(!prodottiPiuRS.equals(null)){
+                while (prodottiPiuRS.next())
+                {
+                    prodottiPiuLabel.setText(prodottiPiuLabel.getText()+", "+prodottiPiuRS.getString(1));
+                }
+                prodottiPiuRS.close();
+            }
+
+        }
+        catch (SQLException e){
+            prodottiPiuLabel.setText("errore nella query");
+            System.out.println("errore query prodotti più acquistati");
+        }
+    }
+
+    private void getFatturato() {
+        try{
+            ResultSet fatturatoRS=connection.getResultSet("SELECT SUM(P.PrezzoAcquisto) FROM Ordine AS O JOIN ProdottoAcquistato AS P ON O.Id=P.Ordine WHERE Data>'1/1/2019' AND Data<'31/12/2019'");
+
+            if(!fatturatoRS.equals(null)){
+                while (fatturatoRS.next())
+                {
+                    fatturatoLabel.setText(fatturatoRS.getString(1));
+                }
+                fatturatoRS.close();
+            }
+
+        }
+        catch (SQLException e){
+            fatturatoLabel.setText("errore nella query");
+            System.out.println("errore query fatturato");
+        }
+    }
+
+    private void loadTableOrdine() {
+        //load degli ordini
+        //colonna id
+        TableColumn<Ordine,String> idColumn=new TableColumn<>("Id");
+        idColumn.setMinWidth(100);
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //colonna data
+        TableColumn<Ordine,String> dataColumn=new TableColumn<>("Data");
+        dataColumn.setMinWidth(100);
+        dataColumn.setCellValueFactory(new PropertyValueFactory<>("data"));
+        //colonna indirizzo
+        TableColumn<Ordine,String> indirizzoColumn=new TableColumn<>("Indirizzo");
+        indirizzoColumn.setMinWidth(200);
+        indirizzoColumn.setCellValueFactory(new PropertyValueFactory<>("indirizzo"));
+        //colonna cliente
+        TableColumn<Ordine,String> clienteColumn=new TableColumn<>("Codice Cliente");
+        clienteColumn.setMinWidth(100);
+        clienteColumn.setCellValueFactory(new PropertyValueFactory<>("cliente"));
+
+        ordineTableView.setItems(getOrdine());
+        ordineTableView.getColumns().addAll(idColumn,dataColumn,indirizzoColumn,clienteColumn);
     }
 
     //torna menù principale
@@ -91,9 +171,30 @@ public class ControllerStatistiche {
             }
         }
         catch (SQLException e){
-            System.out.println("errore");
+            System.out.println("errore in getCitta");
         }
 
         return citta;
+    }
+
+    //prende la lista degli ordini
+    private ObservableList<Ordine> getOrdine(){
+        ObservableList<Ordine> o= FXCollections.observableArrayList();
+        ResultSet rs=connection.getResultSet("SELECT * FROM Ordine");
+        try{
+            if(!rs.equals(null)){
+                while (rs.next())
+                {
+                    o.add(new Ordine(rs.getString(1),rs.getString(2),"Via "+rs.getString(4)+" "+rs.getString(3)+", "+rs.getString(5),rs.getString(6)));
+
+                }
+                rs.close();
+            }
+        }
+        catch (SQLException e){
+            System.out.println("errore in getCitta");
+        }
+
+        return o;
     }
 }

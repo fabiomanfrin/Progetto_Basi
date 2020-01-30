@@ -29,9 +29,9 @@ public class ControllerLogin {
     //connesione al db e cambio scena sul menu
 
     public void connectionButtonClicked(ActionEvent event) throws IOException {
-        connection=new DBConnection();
+        connection=new DBConnection(indirizzoTextField.getText(),usernameTextField.getText(),passwordTextField.getText());
         boolean connRes=false;
-        connRes=connection.connect(indirizzoTextField.getText(),usernameTextField.getText(),passwordTextField.getText());
+        connRes=connection.connect();
 
         if(connRes) {
             FXMLLoader loader= new FXMLLoader();
