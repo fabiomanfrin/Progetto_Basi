@@ -68,7 +68,7 @@ public class ControllerStatistiche {
                     "SELECT Prodotto, COUNT(*) AS Qta" +
                     "FROM ProdottoAcquistato" +
                     "GROUP BY Prodotto" +
-                    ");" +
+                    ")" +
                     "SELECT Prodotto" +
                     "FROM Tot" +
                     "WHERE Qta IN (" +

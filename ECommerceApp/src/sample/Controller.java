@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Node;
-
 public class Controller {
 
     private DBConnection connection=null;
@@ -30,6 +28,7 @@ public class Controller {
     Button aggiungiButton;
     @FXML
     Button modificaButton;
+
 
     public void verifyConnection(DBConnection conn){
         if(conn!=null){
@@ -81,6 +80,22 @@ public class Controller {
         window.setTitle("ECommerce Nuova Autoricambi");
        window.setScene(ViewScene);
        window.show();
+    }
+
+    public void aggiungiButtonClicked(ActionEvent event) throws IOException {
+
+        FXMLLoader loader= new FXMLLoader();
+        loader.setLocation(getClass().getResource("aggiungi.fxml"));
+        Parent ViewParent = loader.load();
+        Scene ViewScene = new Scene(ViewParent,800,500);
+
+        ControllerAggiungi controller= loader.getController();
+        controller.verifyConnection(connection);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setTitle("ECommerce Nuova Autoricambi");
+        window.setScene(ViewScene);
+        window.show();
     }
 
 }
