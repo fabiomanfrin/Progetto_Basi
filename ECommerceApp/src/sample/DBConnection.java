@@ -87,8 +87,23 @@ public class DBConnection {
                 rs= st.executeQuery(query);
             }
         } catch (SQLException ex) {
-            System.out.println("error in query");
+            System.out.println("error in getResultSet"+"\n"+ex.getMessage());
         }
         return rs;
+    }
+
+    public SQLException execQuery(String query){
+        SQLException e=null;
+        try {
+            Statement st = connection.createStatement();
+            if(!connection.equals(null)){
+                st.execute(query);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("error in execQuery()"+"\n"+ex.getMessage());
+            e=ex;
+        }
+        return e;
     }
 }

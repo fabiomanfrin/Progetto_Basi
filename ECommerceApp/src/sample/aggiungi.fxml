@@ -11,12 +11,12 @@
    <center>
       <VBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="ordineButton" mnemonicParsing="false" onAction="#ordineButtonClicked" text="Ordine">
+            <Button fx:id="catalogoButton" mnemonicParsing="false" onAction="#catalogoButtonClicked" text="Catalogo">
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button layoutX="356.0" layoutY="233.0" mnemonicParsing="false" text="Cliente">
+            <Button layoutX="356.0" layoutY="233.0" mnemonicParsing="false" text="Prodotto">
                <font>
                   <Font size="25.0" />
                </font>

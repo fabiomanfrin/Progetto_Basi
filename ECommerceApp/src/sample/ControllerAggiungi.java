@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class ControllerAggiungi {
     @FXML
-    Button ordineButton;
+    Button catalogoButton;
     private DBConnection connection;
 
     public void verifyConnection(DBConnection conn) {
@@ -22,14 +22,14 @@ public class ControllerAggiungi {
         }
     }
 
-    public void ordineButtonClicked(ActionEvent event) throws IOException {
+    public void catalogoButtonClicked(ActionEvent event) throws IOException {
 
         FXMLLoader loader= new FXMLLoader();
-        loader.setLocation(getClass().getResource("aggiungiOrdine.fxml"));
+        loader.setLocation(getClass().getResource("aggiungiCatalogo.fxml"));
         Parent ViewParent = loader.load();
         Scene ViewScene = new Scene(ViewParent,800,500);
 
-        ControllerAggiungiOrdine controller= loader.getController();
+        ControllerAggiungiCatalogo controller= loader.getController();
         controller.verifyConnection(connection);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -47,6 +47,7 @@ public class ControllerAggiungi {
 
         Controller controller= loader.getController();
         controller.verifyConnection(connection);
+
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setTitle("ECommerce Nuova Autoricambi");
