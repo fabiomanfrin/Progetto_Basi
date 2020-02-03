@@ -46,7 +46,8 @@ public class ControllerStatistiche {
     private void loadScene(){
 
         getFatturato();
-        //getProdottiPiuVenduti();
+        //esegue query per i prodotti più venduti
+        getProdottiPiuVenduti();
         loadTableOrdine();
         /*test getCitta
         ObservableList<Citta> test=getCitta();
@@ -64,19 +65,20 @@ public class ControllerStatistiche {
 
     private void getProdottiPiuVenduti() {
         try{
-            ResultSet prodottiPiuRS=connection.getResultSet("CREATE VIEW Tot AS(" +
-                    "SELECT Prodotto, COUNT(*) AS Qta" +
-                    "FROM ProdottoAcquistato" +
-                    "GROUP BY Prodotto" +
-                    ")" +
-                    "SELECT Prodotto" +
-                    "FROM Tot" +
+           SQLException viewTot= connection.execQuery("DROP VIEW IF EXISTS Tot; " +
+                   "CREATE VIEW Tot AS(" +
+                           "SELECT Prodotto, COUNT(*) AS Qta " +
+                           "FROM ProdottoAcquistato " +
+                           "GROUP BY Prodotto);");
+            ResultSet prodottiPiuRS=connection.getResultSet(
+                    "SELECT Prodotto " +
+                    "FROM Tot " +
                     "WHERE Qta IN (" +
-                    "SELECT MAX(Qta)" +
+                    "SELECT MAX(Qta) " +
                     "FROM Tot" +
                     ");");
 
-            if(!prodottiPiuRS.equals(null)){
+            if(prodottiPiuRS!=null){
                 while (prodottiPiuRS.next())
                 {
                     prodottiPiuLabel.setText(prodottiPiuLabel.getText()+", "+prodottiPiuRS.getString(1));
