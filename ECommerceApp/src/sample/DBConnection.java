@@ -51,28 +51,6 @@ public class DBConnection {
         return result;
     }
 
-    public String tryQuery() {
-        String result="";
-        try {
-            Statement st = connection.createStatement();
-            ResultSet rs=null;
-            if(!connection.equals(null)){
-                rs= st.executeQuery("SELECT * FROM Citta");
-                if(!rs.equals(null)){
-                    while (rs.next())
-                    {
-                        //System.out.println(rs.getString(1));
-                        result=result+rs.getString(1);
-                    }
-                    rs.close();
-                    st.close();
-                }
-            }
-        } catch (SQLException ex) {
-            System.out.println("error in query");
-        }
-        return result;
-    }
 
     //prendo solo il result set di una query
 
@@ -83,7 +61,7 @@ public class DBConnection {
         try {
             Statement st = connection.createStatement();
             rs=null;
-            if(!connection.equals(null)){
+            if(connection!=null){
                 rs= st.executeQuery(query);
             }
         } catch (SQLException ex) {
@@ -96,7 +74,7 @@ public class DBConnection {
         SQLException e=null;
         try {
             Statement st = connection.createStatement();
-            if(!connection.equals(null)){
+            if(connection!=null){
                 st.execute(query);
 
             }

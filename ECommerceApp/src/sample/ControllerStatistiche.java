@@ -95,9 +95,9 @@ public class ControllerStatistiche {
 
     private void getFatturato() {
         try{
-            ResultSet fatturatoRS=connection.getResultSet("SELECT SUM(P.PrezzoAcquisto) FROM Ordine AS O JOIN ProdottoAcquistato AS P ON O.Id=P.Ordine WHERE Data>'1/1/2019' AND Data<'31/12/2019'");
+            ResultSet fatturatoRS=connection.getResultSet("SELECT SUM(P.PrezzoAcquisto) FROM Ordine AS O JOIN ProdottoAcquistato AS P ON O.Id=P.Ordine WHERE Data>'2019-1-1' AND Data<'2019-12-31'");
 
-            if(!fatturatoRS.equals(null)){
+            if(fatturatoRS!=null){
                 while (fatturatoRS.next())
                 {
                     fatturatoLabel.setText(fatturatoRS.getString(1));
@@ -167,7 +167,7 @@ public class ControllerStatistiche {
         ObservableList<Citta> citta= FXCollections.observableArrayList();
         ResultSet rs=connection.getResultSet("SELECT * FROM Citta");
         try{
-            if(!rs.equals(null)){
+            if(rs!=null){
                 while (rs.next())
                 {
                     citta.add(new Citta(rs.getString(1)));
@@ -188,7 +188,7 @@ public class ControllerStatistiche {
         ObservableList<Ordine> o= FXCollections.observableArrayList();
         ResultSet rs=connection.getResultSet("SELECT Id, Data, Ordine.Numero, Ordine.Via, Ordine.Citta, Ordine.Cliente, Nome, Cognome FROM Ordine INNER JOIN Cliente ON cliente=codice");
         try{
-            if(!rs.equals(null)){
+            if(rs!=null){
                 while (rs.next())
                 {
                     o.add(new Ordine(rs.getString(1),rs.getString(2),"Via "+rs.getString(4)+" "+rs.getString(3)+" "+rs.getString(5),rs.getString(6),rs.getString(7)+" "+rs.getString(8)));

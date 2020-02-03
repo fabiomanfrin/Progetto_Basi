@@ -74,7 +74,7 @@ public class ControllerAggiungiCatalogo {
         ObservableList<Catalogo> o= FXCollections.observableArrayList();
         ResultSet rs=connection.getResultSet("SELECT Catalogo.anno, Fornitore.ragionesociale, Catalogo.nome FROM Catalogo JOIN Fornitore ON Catalogo.fornitore=Fornitore.piva;");
         try{
-            if(!rs.equals(null)){
+            if(rs!=null){
                 while (rs.next())
                 {
                     o.add(new Catalogo(rs.getString(1),rs.getString(2),rs.getString(3)));
@@ -93,7 +93,7 @@ public class ControllerAggiungiCatalogo {
         ObservableList<Fornitore> fornitore= FXCollections.observableArrayList();
         ResultSet rs=connection.getResultSet("SELECT * FROM Fornitore");
         try{
-            if(!rs.equals(null)){
+            if(rs!=null){
                 while (rs.next())
                 {
                     fornitore.add(new Fornitore(rs.getString(1),rs.getString(2)));
