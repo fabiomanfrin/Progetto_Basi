@@ -79,12 +79,23 @@ public class ControllerStatistiche {
                     ");");
 
             if(prodottiPiuRS!=null){
+                boolean hasNext=false;
                 while (prodottiPiuRS.next())
                 {
-                    prodottiPiuLabel.setText(prodottiPiuLabel.getText()+", "+prodottiPiuRS.getString(1));
+                    hasNext=true;
+                    if(prodottiPiuLabel.getText().equals(""))
+                        prodottiPiuLabel.setText(prodottiPiuRS.getString(1));
+                    else
+                        prodottiPiuLabel.setText(prodottiPiuLabel.getText()+", "+prodottiPiuRS.getString(1));
                 }
                 prodottiPiuRS.close();
+                if(!hasNext){
+                    prodottiPiuLabel.setText("Non disponibile");
+                }
+                
             }
+            else
+                prodottiPiuLabel.setText("Non disponibile");
 
         }
         catch (SQLException e){
@@ -98,11 +109,20 @@ public class ControllerStatistiche {
             ResultSet fatturatoRS=connection.getResultSet("SELECT SUM(P.PrezzoAcquisto) FROM Ordine AS O JOIN ProdottoAcquistato AS P ON O.Id=P.Ordine WHERE Data>'2019-1-1' AND Data<'2019-12-31'");
 
             if(fatturatoRS!=null){
+
                 while (fatturatoRS.next())
                 {
-                    fatturatoLabel.setText(fatturatoRS.getString(1));
+
+                    if(fatturatoRS.getString(1)==null)
+                        fatturatoLabel.setText("Non disponibile");
+                    else
+                        fatturatoLabel.setText(fatturatoRS.getString(1)+" €");
+
                 }
                 fatturatoRS.close();
+            }
+            else{
+                fatturatoLabel.setText("Non disponibile");
             }
 
         }
@@ -191,7 +211,11 @@ public class ControllerStatistiche {
             if(rs!=null){
                 while (rs.next())
                 {
-                    o.add(new Ordine(rs.getString(1),rs.getString(2),"Via "+rs.getString(4)+" "+rs.getString(3)+" "+rs.getString(5),rs.getString(6),rs.getString(7)+" "+rs.getString(8)));
+                    //se la via è nulla allora l'indirizzo sarà nullo e quindi non disponibile
+                    if(rs.getString(4)==null)
+                        o.add(new Ordine(rs.getString(1),rs.getString(2),"Nessun indirizzo",rs.getString(6),rs.getString(7)+" "+rs.getString(8)));
+                    else
+                        o.add(new Ordine(rs.getString(1),rs.getString(2),"Via "+rs.getString(4)+" "+rs.getString(3)+" "+rs.getString(5),rs.getString(6),rs.getString(7)+" "+rs.getString(8)));
                 }
                 rs.close();
             }

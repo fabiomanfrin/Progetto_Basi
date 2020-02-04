@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,22 +29,20 @@ public class Controller {
     Button aggiungiButton;
     @FXML
     Button modificaButton;
+    @FXML
+    MenuButton aggiungiMenuButton;
 
 
     public void verifyConnection(DBConnection conn){
         if(conn!=null){
             connection=conn;
             connectionLabel.setText("Connected");
-            connectionButton.setDisable(true);
-            statisticheButton.setDisable(false);
-            aggiungiButton.setDisable(false);
-            modificaButton.setDisable(false);
         }
 
 
     }
 
-    public void connectionButtonClicked(){
+   /* public void connectionButtonClicked(){
         connection=new DBConnection("localhost/test","postgres","admin");
         boolean connRes=false;
         connRes=connection.connect();
@@ -56,7 +55,7 @@ public class Controller {
             modificaButton.setDisable(false);
         }
         //String result=connection.tryQuery();
-    }
+    }*/
 
 
     //apre il sotto menù statistiche
@@ -82,17 +81,35 @@ public class Controller {
        window.show();
     }
 
-    public void aggiungiButtonClicked(ActionEvent event) throws IOException {
+    public void aggiungiCatalogoButtonClicked(ActionEvent event) throws IOException {
+
+        FXMLLoader loader= new FXMLLoader();
+        loader.setLocation(getClass().getResource("aggiungiCatalogo.fxml"));
+        Parent ViewParent = loader.load();
+        Scene ViewScene = new Scene(ViewParent,800,500);
+
+        ControllerAggiungiCatalogo controller= loader.getController();
+        controller.verifyConnection(connection);
+
+//        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); //per il bottone, visto che uso il menù non serve più
+        Stage window = (Stage)aggiungiMenuButton.getScene().getWindow();
+        window.setTitle("ECommerce Nuova Autoricambi");
+        window.setScene(ViewScene);
+        window.show();
+    }
+
+    public void aggiungiProdottoButtonClicked(ActionEvent event) throws IOException {
 
         FXMLLoader loader= new FXMLLoader();
         loader.setLocation(getClass().getResource("aggiungi.fxml"));
         Parent ViewParent = loader.load();
         Scene ViewScene = new Scene(ViewParent,800,500);
 
-        ControllerAggiungi controller= loader.getController();
-        controller.verifyConnection(connection);
+        //ControllerAggiungi controller= loader.getController();
+        //controller.verifyConnection(connection);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); //per il bottone, visto che uso il menù non serve più
+        Stage window = (Stage)aggiungiMenuButton.getScene().getWindow();
         window.setTitle("ECommerce Nuova Autoricambi");
         window.setScene(ViewScene);
         window.show();

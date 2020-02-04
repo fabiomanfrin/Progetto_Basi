@@ -132,11 +132,11 @@ public class ControllerAggiungiCatalogo {
         window.show();*/
 
         FXMLLoader loader= new FXMLLoader();
-        loader.setLocation(getClass().getResource("aggiungi.fxml"));
+        loader.setLocation(getClass().getResource("sample.fxml"));
         Parent ViewParent = loader.load();
         Scene ViewScene = new Scene(ViewParent,800,500);
 
-        ControllerAggiungi controller= loader.getController();
+        Controller controller= loader.getController();
         controller.verifyConnection(connection);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
