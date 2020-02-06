@@ -48,19 +48,9 @@ public class ControllerStatistiche {
         getFatturato();
         //esegue query per i prodotti più venduti
         getProdottiPiuVenduti();
+        //esegue query per ordini e carica la tabella degli ordini
         loadTableOrdine();
-        /*test getCitta
-        ObservableList<Citta> test=getCitta();
-        System.out.println(test.get(0).getNome());
-        */
-        /*load delle citta
-        TableColumn<Citta,String> nomeColumn=new TableColumn<>("Nome");
-        nomeColumn.setMinWidth(100);
-        nomeColumn.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
-        cittaTableView.setItems(getCitta());
-        cittaTableView.getColumns().addAll(nomeColumn);
-        */
     }
 
     private void getProdottiPiuVenduti() {

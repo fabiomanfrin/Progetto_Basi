@@ -17,9 +17,9 @@
             <Region HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER" spacing="15.0">
                <children>
-                  <TextField fx:id="indirizzoTextField" minWidth="225.0" promptText=" Indirizzo es.(&quot;localhost:port/db_name&quot;)" text="localhost/progetto" />
-                  <TextField fx:id="usernameTextField" promptText="Username" text="postgres" />
-                  <TextField fx:id="passwordTextField" promptText="Password" text="admin" />
+                  <TextField fx:id="indirizzoTextField" minWidth="225.0" promptText=" Indirizzo es.(&quot;localhost:port/db_name&quot;)" text="localhost:12345/vettorfede" />
+                  <TextField fx:id="usernameTextField" promptText="Username" text="vettorfede" />
+                  <TextField fx:id="passwordTextField" promptText="Password" text="F21081998." />
                   <Button mnemonicParsing="false" onAction="#connectionButtonClicked" text="Try connection">
                      <VBox.margin>
                         <Insets top="25.0" />

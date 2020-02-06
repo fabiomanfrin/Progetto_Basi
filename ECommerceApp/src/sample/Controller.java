@@ -22,11 +22,7 @@ public class Controller {
     @FXML
     Label errorLabel;
     @FXML
-    Button connectionButton;
-    @FXML
     Button statisticheButton;
-    @FXML
-    Button aggiungiButton;
     @FXML
     Button modificaButton;
     @FXML
@@ -101,12 +97,12 @@ public class Controller {
     public void aggiungiProdottoButtonClicked(ActionEvent event) throws IOException {
 
         FXMLLoader loader= new FXMLLoader();
-        loader.setLocation(getClass().getResource("aggiungi.fxml"));
+        loader.setLocation(getClass().getResource("aggiungiProdotto.fxml"));
         Parent ViewParent = loader.load();
         Scene ViewScene = new Scene(ViewParent,800,500);
 
-        //ControllerAggiungi controller= loader.getController();
-        //controller.verifyConnection(connection);
+        ControllerAggiungiProdotto controller= loader.getController();
+        controller.verifyConnection(connection);
 
 //        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); //per il bottone, visto che uso il menù non serve più
         Stage window = (Stage)aggiungiMenuButton.getScene().getWindow();

@@ -78,7 +78,7 @@
                   <MenuButton fx:id="aggiungiMenuButton" minWidth="150.0" mnemonicParsing="false" text="Aggiungi">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#aggiungiCatalogoButtonClicked" text="Aggiungi catalogo" />
-                      <MenuItem mnemonicParsing="false" text="Aggiungi prodotto" />
+                      <MenuItem mnemonicParsing="false" onAction="#aggiungiProdottoButtonClicked" text="Aggiungi prodotto" />
                     </items>
                   </MenuButton>
                   <Button fx:id="modificaButton" minWidth="150.0" mnemonicParsing="false" text="Modifica dati">
