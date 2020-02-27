@@ -82,7 +82,7 @@ public class ControllerAggiungiProdotto {
         descrizioneColumn.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
         //colonna catalogo
         TableColumn<Prodotto,String> catalogoColumn=new TableColumn<>("Catalogo");
-        catalogoColumn.setMinWidth(100);
+        catalogoColumn.setMinWidth(200);
         catalogoColumn.setCellValueFactory(new PropertyValueFactory<>("catalogo"));
         //colonna categoria
         TableColumn<Prodotto,String> categoriaColumn=new TableColumn<>("Categoria");
@@ -99,12 +99,12 @@ public class ControllerAggiungiProdotto {
 
     private ObservableList<Prodotto> getProdotti() {
         ObservableList<Prodotto> o= FXCollections.observableArrayList();
-        ResultSet rs=connection.getResultSet("SELECT * FROM prodotto;");
+        ResultSet rs=connection.getResultSet("SELECT codiceabarre,descrizione,annocatalogo,fornitore,categoria,prezzoattuale,ragionesociale FROM Prodotto JOIN Fornitore ON fornitore=piva;");
         try{
             if(rs!=null){
                 while (rs.next())
                 {
-                    o.add(new Prodotto(rs.getString(1),rs.getString(2),rs.getString(3)+"-"+rs.getString(4),rs.getString(5),rs.getString(6)+" €"));
+                    o.add(new Prodotto(rs.getString(1),rs.getString(2),rs.getString(3)+"-"+rs.getString(7)+"-"+rs.getString(4),rs.getString(5),rs.getString(6)+" €"));
                 }
                 rs.close();
             }
@@ -118,12 +118,12 @@ public class ControllerAggiungiProdotto {
 
     private ObservableList<Catalogo> getCatalogo(){
         ObservableList<Catalogo> o= FXCollections.observableArrayList();
-        ResultSet rs=connection.getResultSet("SELECT * FROM Catalogo");
+        ResultSet rs=connection.getResultSet("SELECT Catalogo.anno,Fornitore.ragionesociale,Catalogo.fornitore,Catalogo.nome FROM Catalogo JOIN Fornitore ON fornitore=piva");
         try{
             if(rs!=null){
                 while (rs.next())
                 {
-                    o.add(new Catalogo(rs.getString(1),rs.getString(2),rs.getString(3)));
+                    o.add(new Catalogo(rs.getString(1),rs.getString(2)+"-"+rs.getString(3),rs.getString(4)));
 
                 }
                 rs.close();
@@ -173,8 +173,10 @@ public class ControllerAggiungiProdotto {
             errorLabel.setText("Aggiunto con successo");
             errorLabel.setTextFill(Color.web("#1dff00"));
         }
-        ObservableList<Prodotto> o=getProdotti();
-        prodottoTableView.getItems().add(o.get(o.size()-1));
+     /*   ObservableList<Prodotto> o=getProdotti();
+        prodottoTableView.getItems().add(o.get(o.size()-1));*/
+        prodottoTableView.getColumns().remove(0,prodottoTableView.getColumns().size());
+        loadTableProdotti();
     }
 
     private String formatPrezzo(String t) {
@@ -190,10 +192,10 @@ public class ControllerAggiungiProdotto {
 
     private String getFornitoreCat(String t) {
         String result="";
-        for (int i=5;i<t.length()-1;i++){ //anno(4 caratteri)-fornitore
-            if(t.charAt(i)==' ')
+        for (int i=t.length()-1;i>=0;i--){ //anno(4 caratteri)-fornitore
+            if(t.charAt(i)=='-')
                 break;
-            result=result+t.charAt(i);
+            result=t.charAt(i)+result;
         }
         return result;
     }

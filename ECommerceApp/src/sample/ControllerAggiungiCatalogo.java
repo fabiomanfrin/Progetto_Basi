@@ -42,10 +42,10 @@ public class ControllerAggiungiCatalogo {
     private void loadScene() {
         ObservableList<Fornitore> l=getFornitore();
         for (int i=0;i<l.size();i++){
-            fornitoreChoiceBox.getItems().add(l.get(i).getPIVA());
+            fornitoreChoiceBox.getItems().add(l.get(i).getRagioneSociale()+"-"+l.get(i).getPIVA());
         }
         if(l.size()>0)
-            fornitoreChoiceBox.setValue(l.get(0).getPIVA());
+            fornitoreChoiceBox.setValue(l.get(0).getRagioneSociale()+"-"+l.get(0).getPIVA());
         loadTableCatalogo();
 
 
@@ -59,7 +59,7 @@ public class ControllerAggiungiCatalogo {
             annoColumn.setCellValueFactory(new PropertyValueFactory<>("anno"));
             //colonna Fornitore
             TableColumn<Catalogo,String> fornitoreColumn=new TableColumn<>("Fornitore");
-            fornitoreColumn.setMinWidth(100);
+            fornitoreColumn.setMinWidth(200);
             fornitoreColumn.setCellValueFactory(new PropertyValueFactory<>("fornitore"));
             //colonna nome
             TableColumn<Catalogo,String> nomeColumn=new TableColumn<>("Nome");
@@ -72,18 +72,18 @@ public class ControllerAggiungiCatalogo {
 
     private ObservableList<Catalogo> getCataloghi() {
         ObservableList<Catalogo> o= FXCollections.observableArrayList();
-        ResultSet rs=connection.getResultSet("SELECT Catalogo.anno, Fornitore.ragionesociale, Catalogo.nome FROM Catalogo JOIN Fornitore ON Catalogo.fornitore=Fornitore.piva;");
+        ResultSet rs=connection.getResultSet("SELECT Catalogo.anno, Fornitore.ragionesociale,Fornitore.piva, Catalogo.nome FROM Catalogo JOIN Fornitore ON Catalogo.fornitore=Fornitore.piva;");
         try{
             if(rs!=null){
                 while (rs.next())
                 {
-                    o.add(new Catalogo(rs.getString(1),rs.getString(2),rs.getString(3)));
+                    o.add(new Catalogo(rs.getString(1),rs.getString(2)+"-"+rs.getString(3),rs.getString(4)));
                 }
                 rs.close();
             }
         }
         catch (SQLException e){
-            System.out.println("errore in getCitta");
+            System.out.println("errore in getCataloghi");
         }
 
         return o;
@@ -103,7 +103,7 @@ public class ControllerAggiungiCatalogo {
             }
         }
         catch (SQLException e){
-            System.out.println("errore in getCitta");
+            System.out.println("errore in getFornitore");
         }
 
         return fornitore;
@@ -112,7 +112,8 @@ public class ControllerAggiungiCatalogo {
 
     public void aggiungiButtonClicked() {
         SQLException e=null;
-        e=connection.execQuery("INSERT INTO Catalogo VALUES('"+annoTextField.getText()+"','"+fornitoreChoiceBox.getSelectionModel().getSelectedItem()+"','"+nomeTextField.getText()+"');");
+        String piva=getPiva(fornitoreChoiceBox.getSelectionModel().getSelectedItem());
+        e=connection.execQuery("INSERT INTO Catalogo VALUES('"+annoTextField.getText()+"','"+piva+"','"+nomeTextField.getText()+"');");
         if(e!=null){
             errorLabel.setText(e.getMessage());
         }
@@ -122,6 +123,18 @@ public class ControllerAggiungiCatalogo {
         }
         ObservableList<Catalogo> o=getCataloghi();
         catalogoTableView.getItems().add(o.get(o.size()-1));
+    }
+
+    //get piva from selected item ragionesociale-piva
+    private String getPiva(String s) {
+        String result="";
+        for (int i=s.length()-1;i>=0;i--){
+            if(s.charAt(i)=='-')
+                break;
+            else
+                result=s.charAt(i)+result;
+        }
+        return result;
     }
 
 

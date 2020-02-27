@@ -41,7 +41,7 @@
             <HBox alignment="CENTER_LEFT" spacing="20.0">
                <children>
                   <TextField fx:id="codiceABarreTextField" promptText="Codice a barre" />
-                  <ChoiceBox fx:id="catalogoChoiceBox" prefWidth="150.0" />
+                  <ChoiceBox fx:id="catalogoChoiceBox" prefWidth="210.0" />
                   <ChoiceBox fx:id="categoriaChoiceBox" layoutX="179.0" layoutY="10.0" prefWidth="150.0" />
                   <TextField fx:id="prezzoAttualeTextField" layoutX="423.0" layoutY="10.0" promptText="Prezzo attuale" />
                </children>

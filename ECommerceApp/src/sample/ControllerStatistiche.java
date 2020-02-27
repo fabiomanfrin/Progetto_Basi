@@ -142,7 +142,7 @@ public class ControllerStatistiche {
         clienteColumn.setCellValueFactory(new PropertyValueFactory<>("codice"));
         //colonna nome cliente
         TableColumn<Ordine,String> nomeClienteColumn=new TableColumn<>("Nome Cliente");
-        nomeClienteColumn.setMinWidth(100);
+        nomeClienteColumn.setMinWidth(150);
         nomeClienteColumn.setCellValueFactory(new PropertyValueFactory<>("cliente"));
 
         ordineTableView.setItems(getOrdine());
