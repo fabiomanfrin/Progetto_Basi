@@ -81,7 +81,7 @@
                       <MenuItem mnemonicParsing="false" onAction="#aggiungiProdottoButtonClicked" text="Aggiungi prodotto" />
                     </items>
                   </MenuButton>
-                  <Button fx:id="modificaButton" minWidth="150.0" mnemonicParsing="false" text="Modifica dati">
+                  <Button fx:id="modificaButton" minWidth="150.0" mnemonicParsing="false" onAction="#modificaResoButtonClicked" text="Modifica reso">
                      <font>
                         <Font size="20.0" />
                      </font>

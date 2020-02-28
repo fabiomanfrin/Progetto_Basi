@@ -63,18 +63,18 @@ public class Controller {
         window.show();
         */
 
-       FXMLLoader loader= new FXMLLoader();
-       loader.setLocation(getClass().getResource("statistiche.fxml"));
-       Parent ViewParent = loader.load();
-       Scene ViewScene = new Scene(ViewParent,800,500);
+        FXMLLoader loader= new FXMLLoader();
+        loader.setLocation(getClass().getResource("statistiche.fxml"));
+        Parent ViewParent = loader.load();
+        Scene ViewScene = new Scene(ViewParent,800,500);
 
-       ControllerStatistiche controllerStat= loader.getController();
-       controllerStat.verifyConnection(connection);
+        ControllerStatistiche controllerStat= loader.getController();
+        controllerStat.verifyConnection(connection);
 
-       Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setTitle("ECommerce Nuova Autoricambi");
-       window.setScene(ViewScene);
-       window.show();
+        window.setScene(ViewScene);
+        window.show();
     }
 
     public void aggiungiCatalogoButtonClicked(ActionEvent event) throws IOException {
@@ -106,6 +106,22 @@ public class Controller {
 
 //        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); //per il bottone, visto che uso il menù non serve più
         Stage window = (Stage)aggiungiMenuButton.getScene().getWindow();
+        window.setTitle("ECommerce Nuova Autoricambi");
+        window.setScene(ViewScene);
+        window.show();
+    }
+
+    public void modificaResoButtonClicked(ActionEvent event) throws IOException {
+
+        FXMLLoader loader= new FXMLLoader();
+        loader.setLocation(getClass().getResource("modificaReso.fxml"));
+        Parent ViewParent = loader.load();
+        Scene ViewScene = new Scene(ViewParent,800,500);
+
+        ControllerModificaReso controller= loader.getController();
+        controller.verifyConnection(connection);
+
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setTitle("ECommerce Nuova Autoricambi");
         window.setScene(ViewScene);
         window.show();
