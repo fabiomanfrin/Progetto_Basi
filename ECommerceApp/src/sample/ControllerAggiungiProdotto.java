@@ -15,8 +15,10 @@ import javafx.stage.Stage;
 
 import javax.swing.text.TabableView;
 import java.io.IOException;
+import java.math.RoundingMode;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 public class ControllerAggiungiProdotto {
 
@@ -104,7 +106,11 @@ public class ControllerAggiungiProdotto {
             if(rs!=null){
                 while (rs.next())
                 {
-                    o.add(new Prodotto(rs.getString(1),rs.getString(2),rs.getString(3)+"-"+rs.getString(7)+"-"+rs.getString(4),rs.getString(5),rs.getString(6)+" €"));
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    df.setRoundingMode(RoundingMode.CEILING);
+                    Float prezzo=rs.getFloat(6);
+
+                    o.add(new Prodotto(rs.getString(1),rs.getString(2),rs.getString(3)+"-"+rs.getString(7)+"-"+rs.getString(4),rs.getString(5),df.format(prezzo)+" €"));
                 }
                 rs.close();
             }

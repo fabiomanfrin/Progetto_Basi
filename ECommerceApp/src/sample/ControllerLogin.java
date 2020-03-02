@@ -7,7 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,7 +23,7 @@ public class ControllerLogin {
     @FXML
     TextField usernameTextField;
     @FXML
-    TextField passwordTextField;
+    PasswordField passwordPasswordField;
     @FXML
     Label errorLabel;
 
@@ -29,7 +31,7 @@ public class ControllerLogin {
     //connesione al db e cambio scena sul menu
 
     public void connectionButtonClicked(ActionEvent event) throws IOException {
-        connection=new DBConnection(indirizzoTextField.getText(),usernameTextField.getText(),passwordTextField.getText());
+        connection=new DBConnection(indirizzoTextField.getText(),usernameTextField.getText(),passwordPasswordField.getText());
         boolean connRes=false;
         connRes=connection.connect();
 
@@ -43,6 +45,7 @@ public class ControllerLogin {
             controller.verifyConnection(connection);
 
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
             window.setTitle("ECommerce Nuova Autoricambi");
             window.setScene(ViewScene);
             window.show();

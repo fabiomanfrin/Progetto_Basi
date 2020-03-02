@@ -162,8 +162,8 @@ public class ControllerModificaReso {
             errorLabel.setText("Aggiornato con successo");
             errorLabel.setTextFill(Color.web("#1dff00"));
         }
-        ObservableList<Reso> o=getReso();
-        resoTableView.getItems().add(o.get(o.size()-1));
+       /* ObservableList<Reso> o=getReso();
+        resoTableView.getItems().add(o.get(o.size()-1));*/
         resoTableView.getColumns().remove(0,resoTableView.getColumns().size());
         loadTableReso();
     }
