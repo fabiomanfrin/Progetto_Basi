@@ -41,7 +41,7 @@
       <HBox BorderPane.alignment="CENTER">
          <children>
             <Region HBox.hgrow="ALWAYS" />
-            <Label text="Login ECommerce NA">
+            <Label text="Login E-Commerce NA">
                <font>
                   <Font size="41.0" />
                </font>

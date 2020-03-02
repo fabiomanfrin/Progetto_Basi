@@ -39,7 +39,7 @@
             <Region HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER">
                <children>
-                  <Label alignment="CENTER" text="ECommerce NA">
+                  <Label alignment="CENTER" text="E-Commerce NA">
                      <font>
                         <Font size="33.0" />
                      </font>

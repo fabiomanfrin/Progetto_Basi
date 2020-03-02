@@ -233,7 +233,7 @@ public class ControllerAggiungiProdotto {
         controller.verifyConnection(connection);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setTitle("ECommerce Nuova Autoricambi");
+        //window.setTitle("E-Commerce Nuova Autoricambi");
         window.setScene(ViewScene);
         window.show();
     }

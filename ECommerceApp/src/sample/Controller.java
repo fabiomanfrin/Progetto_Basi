@@ -72,7 +72,7 @@ public class Controller {
         controllerStat.verifyConnection(connection);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setTitle("ECommerce Nuova Autoricambi");
+        //window.setTitle("ECommerce Nuova Autoricambi");
         window.setScene(ViewScene);
         window.show();
     }
@@ -89,7 +89,7 @@ public class Controller {
 
 //        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); //per il bottone, visto che uso il menù non serve più
         Stage window = (Stage)aggiungiMenuButton.getScene().getWindow();
-        window.setTitle("ECommerce Nuova Autoricambi");
+        //window.setTitle("ECommerce Nuova Autoricambi");
         window.setScene(ViewScene);
         window.show();
     }
@@ -106,7 +106,7 @@ public class Controller {
 
 //        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow(); //per il bottone, visto che uso il menù non serve più
         Stage window = (Stage)aggiungiMenuButton.getScene().getWindow();
-        window.setTitle("ECommerce Nuova Autoricambi");
+        //window.setTitle("ECommerce Nuova Autoricambi");
         window.setScene(ViewScene);
         window.show();
     }
@@ -122,7 +122,7 @@ public class Controller {
         controller.verifyConnection(connection);
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setTitle("ECommerce Nuova Autoricambi");
+        //window.setTitle("E-Commerce Nuova Autoricambi");
         window.setScene(ViewScene);
         window.show();
     }

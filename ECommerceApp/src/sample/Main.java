@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
       //  Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-        primaryStage.setTitle("ECommerce Nuova Autoricambi");
+        primaryStage.setTitle("E-Commerce Nuova Autoricambi");
 
         //icona
          //primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("img/icon.png")));

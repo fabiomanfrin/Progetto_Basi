@@ -46,7 +46,7 @@ public class ControllerLogin {
 
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-            window.setTitle("ECommerce Nuova Autoricambi");
+            //window.setTitle("ECommerce Nuova Autoricambi");
             window.setScene(ViewScene);
             window.show();
         }
