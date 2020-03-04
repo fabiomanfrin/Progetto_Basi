@@ -113,16 +113,28 @@ public class ControllerAggiungiCatalogo {
     public void aggiungiButtonClicked() {
         SQLException e=null;
         String piva=getPiva(fornitoreChoiceBox.getSelectionModel().getSelectedItem());
-        e=connection.execQuery("INSERT INTO Catalogo VALUES('"+annoTextField.getText()+"','"+piva+"','"+nomeTextField.getText()+"');");
-        if(e!=null){
-            errorLabel.setText(e.getMessage());
+        //check lunghezza stringa anno
+        if(annoTextField.getText().length()==4){
+            e=connection.execQuery("INSERT INTO Catalogo VALUES('"+annoTextField.getText()+"','"+piva+"','"+nomeTextField.getText()+"');");
+            if(e!=null){
+                errorLabel.setText(e.getMessage());
+                errorLabel.setTextFill(Color.web("#ff0000"));
+            }
+            else{
+                errorLabel.setText("Aggiunto con successo");
+                errorLabel.setTextFill(Color.web("#1dff00"));
+            /*ObservableList<Catalogo> o=getCataloghi();
+            catalogoTableView.getItems().add(o.get(o.size()-1));*/
+                catalogoTableView.getColumns().remove(0,catalogoTableView.getColumns().size());
+                loadTableCatalogo();
+            }
         }
         else{
-            errorLabel.setText("Aggiunto con successo");
-            errorLabel.setTextFill(Color.web("#1dff00"));
+            errorLabel.setText("Anno non valido");
+            errorLabel.setTextFill(Color.web("#ff0000"));
         }
-        ObservableList<Catalogo> o=getCataloghi();
-        catalogoTableView.getItems().add(o.get(o.size()-1));
+
+
     }
 
     //get piva from selected item ragionesociale-piva

@@ -157,15 +157,19 @@ public class ControllerModificaReso {
         e=connection.execQuery("UPDATE Reso SET Motivazione = '"+motivazione+"',Saldato = '"+saldato+"' WHERE Id = '"+id+"';");
         if(e!=null){
             errorLabel.setText(e.getMessage());
+            errorLabel.setTextFill(Color.web("#ff0000"));
         }
         else{
             errorLabel.setText("Aggiornato con successo");
-            errorLabel.setTextFill(Color.web("#1dff00"));
+            errorLabel.setTextFill(Color.web("#1dff00"));//colore verde
+            resoTableView.getColumns().remove(0,resoTableView.getColumns().size());
+            loadTableReso();
         }
        /* ObservableList<Reso> o=getReso();
         resoTableView.getItems().add(o.get(o.size()-1));*/
-        resoTableView.getColumns().remove(0,resoTableView.getColumns().size());
-        loadTableReso();
+        /*resoTableView.getColumns().remove(0,resoTableView.getColumns().size());
+        loadTableReso();*/
+
     }
 
 

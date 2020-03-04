@@ -174,15 +174,18 @@ public class ControllerAggiungiProdotto {
         //System.out.println("INSERT INTO Prodotto VALUES('"+codice+"','"+descrizione+"','"+annoCat+"','"+fornitoreCat+"','"+categoria+"','"+prezzo+"');");
         if(e!=null){
             errorLabel.setText(e.getMessage());
+            errorLabel.setTextFill(Color.web("#ff0000"));
         }
         else{
             errorLabel.setText("Aggiunto con successo");
             errorLabel.setTextFill(Color.web("#1dff00"));
+            prodottoTableView.getColumns().remove(0,prodottoTableView.getColumns().size());
+            loadTableProdotti();
         }
      /*   ObservableList<Prodotto> o=getProdotti();
         prodottoTableView.getItems().add(o.get(o.size()-1));*/
-        prodottoTableView.getColumns().remove(0,prodottoTableView.getColumns().size());
-        loadTableProdotti();
+       /* prodottoTableView.getColumns().remove(0,prodottoTableView.getColumns().size());
+        loadTableProdotti();*/
     }
 
     private String formatPrezzo(String t) {
